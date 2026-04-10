@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>InVerum — Operational Efficiency & Technology Services</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #131110;
+    --bg-2: #1a1715;
+    --bg-3: #201d1a;
+    --bg-4: #272320;
+    --copper: #B87333;
+    --copper-light: #d4884a;
+    --copper-subtle: rgba(184,115,51,0.09);
+    --text: #f0ebe3;
+    --text-2: #a89880;
+    --text-3: #6b5a48;
+    --border: rgba(184,115,51,0.18);
+    --border-2: rgba(255,255,255,0.06);
+    --font-head: 'Cormorant Garamond', serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 3rem;
+    background: rgba(19,17,16,0.88);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border-2);
+    transition: all 0.3s ease;
+  }
+
+  .nav-logo {
+    font-family: var(--font-head);
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .nav-logo span { color: var(--copper); }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: var(--text-2);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--text); }
+
+  .btn-nav {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--bg) !important;
+    background: var(--copper);
+    padding: 0.5rem 1.25rem;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn-nav:hover {
+    background: #d4884a !important;
+    color: var(--bg) !important;
+    transform: translateY(-1px);
+  }
+
+  /* SECTIONS */
+  section { padding: 6rem 3rem; }
+
+  .container {
+    max-width: 1140px;
+    margin: 0 auto;
+  }
+
+  /* HERO */
+  #home {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 8rem;
+    padding-bottom: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 70% 50%, rgba(184,115,51,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 20% 80%, rgba(184,115,51,0.06) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .hero-grid-lines {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(184,115,51,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(184,115,51,0.04) 1px, transparent 1px);
+    background-size: 80px 80px;
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 5rem;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--copper);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.2s forwards;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--copper);
+  }
+
+  .hero-h1 {
+    font-family: var(--font-head);
+    font-size: clamp(3rem, 6vw, 5rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.35s forwards;
+  }
+
+  .hero-h1 em {
+    font-style: normal;
+    color: var(--copper);
+  }
+
+  .hero-sub {
+    font-size: 1.125rem;
+    font-weight: 300;
+    color: var(--text-2);
+    line-height: 1.75;
+    max-width: 520px;
+    margin-bottom: 1rem;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.5s forwards;
+  }
+
+  .hero-tailor {
+    font-size: 0.9375rem;
+    color: var(--text-3);
+    font-style: italic;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.6s forwards;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 1rem;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.75s forwards;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--bg);
+    background: var(--copper);
+    padding: 0.875rem 2rem;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn-primary:hover { background: #d4884a; transform: translateY(-2px); }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-2);
+    background: transparent;
+    padding: 0.875rem 2rem;
+    border-radius: 2px;
+    border: 1px solid var(--border);
+    text-decoration: none;
+    transition: color 0.2s, border-color 0.2s, transform 0.15s;
+  }
+
+  .btn-secondary:hover {
+    color: var(--text);
+    border-color: rgba(184,115,51,0.4);
+    transform: translateY(-2px);
+  }
+
+  /* FOUNDER PHOTO */
+  .hero-photo {
+    position: relative;
+    opacity: 0;
+    animation: fadeIn 1s ease 0.9s forwards;
+  }
+
+  .hero-photo-frame {
+    width: 100%;
+    aspect-ratio: 3/4;
+    background: var(--bg-3);
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+  }
+
+  .photo-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    color: var(--text-3);
+    font-size: 0.875rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .photo-placeholder svg {
+    width: 48px;
+    height: 48px;
+    opacity: 0.3;
+  }
+
+  .hero-photo-accent {
+    position: absolute;
+    bottom: -1rem;
+    right: -1rem;
+    width: 60%;
+    height: 60%;
+    border: 1px solid rgba(184,115,51,0.2);
+    pointer-events: none;
+  }
+
+  .hero-photo-label {
+    position: absolute;
+    bottom: 1.5rem;
+    left: -1.5rem;
+    background: var(--bg-4);
+    border: 1px solid var(--border);
+    padding: 0.75rem 1.25rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--copper);
+  }
+
+  /* CLIENTS STRIP */
+  .clients-strip {
+    padding: 2.5rem 3rem;
+    border-top: 1px solid var(--border-2);
+    border-bottom: 1px solid var(--border-2);
+    background: var(--bg-2);
+  }
+
+  .clients-inner {
+    max-width: 1140px;
+    margin: 0 auto;
+  }
+
+  .clients-label {
+    font-size: 0.6875rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .clients-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem 3rem;
+  }
+
+  .client-name {
+    font-family: var(--font-head);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    transition: color 0.2s;
+  }
+
+  .client-name:hover { color: var(--text-2); }
+
+  /* SECTION LABELS */
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--copper);
+    margin-bottom: 1.25rem;
+  }
+
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 1px;
+    background: var(--copper);
+  }
+
+  .section-h2 {
+    font-family: var(--font-head);
+    font-size: clamp(2rem, 3.5vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 1.25rem;
+  }
+
+  .section-h2 em {
+    font-style: normal;
+    color: var(--copper);
+  }
+
+  .section-intro {
+    font-size: 1.0625rem;
+    color: var(--text-2);
+    line-height: 1.75;
+    max-width: 560px;
+  }
+
+  /* PROBLEM SECTION */
+  #problem {
+    background: var(--bg-2);
+  }
+
+  .problem-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .problem-right {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding-top: 0.5rem;
+  }
+
+  .problem-point {
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+  }
+
+  .problem-point-num {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-head);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--copper);
+    margin-top: 0.2rem;
+  }
+
+  .problem-point-text h4 {
+    font-family: var(--font-head);
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.35rem;
+    letter-spacing: 0.01em;
+  }
+
+  .problem-point-text p {
+    font-size: 0.9375rem;
+    color: var(--text-2);
+    line-height: 1.65;
+  }
+
+  /* SERVICES */
+  #services { background: var(--bg); }
+
+  .services-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 4rem;
+    align-items: end;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border-2);
+    border: 1px solid var(--border-2);
+  }
+
+  .service-card {
+    background: var(--bg-2);
+    padding: 2rem;
+    transition: background 0.25s;
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .service-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--copper);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+
+  .service-card:hover { background: var(--bg-3); }
+  .service-card:hover::after { transform: scaleX(1); }
+
+  .service-icon {
+    width: 36px;
+    height: 36px;
+    margin-bottom: 1.25rem;
+    color: var(--copper);
+  }
+
+  .service-card h3 {
+    font-family: var(--font-head);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.625rem;
+    letter-spacing: 0.01em;
+  }
+
+  .service-card p {
+    font-size: 0.9rem;
+    color: var(--text-2);
+    line-height: 1.65;
+  }
+
+  /* THE FIRM */
+  #the-firm { background: var(--bg-2); }
+
+  .firm-grid {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .firm-body p {
+    font-size: 1rem;
+    color: var(--text-2);
+    line-height: 1.8;
+    margin-bottom: 1.25rem;
+  }
+
+  .firm-body p strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .firm-credentials {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-2);
+  }
+
+  .credential {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    font-size: 0.875rem;
+  }
+
+  .credential::before {
+    content: '';
+    flex-shrink: 0;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--copper);
+    position: relative;
+    top: -1px;
+  }
+
+  .credential span { color: var(--text-2); }
+  .credential strong { color: var(--text); font-weight: 500; }
+
+  .firm-photo {
+    position: sticky;
+    top: 6rem;
+  }
+
+  .firm-photo-frame {
+    width: 100%;
+    aspect-ratio: 4/5;
+    background: var(--bg-3);
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 1.25rem;
+  }
+
+  .firm-photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+  }
+
+  .firm-stat {
+    background: var(--copper-subtle);
+    border: 1px solid rgba(184,115,51,0.25);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .firm-stat-num {
+    font-family: var(--font-head);
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--text);
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+
+  .firm-stat-label {
+    font-size: 0.8125rem;
+    color: var(--text-3);
+    letter-spacing: 0.05em;
+  }
+
+  /* HOW IT WORKS */
+  #how-it-works { background: var(--bg); }
+
+  .process-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+    margin-top: 3.5rem;
+  }
+
+  .process-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .process-step {
+    display: flex;
+    gap: 1.5rem;
+    padding-bottom: 2rem;
+    position: relative;
+  }
+
+  .process-step:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 32px;
+    bottom: 0;
+    width: 1px;
+    background: var(--border-2);
+  }
+
+  .step-num {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--border);
+    background: var(--bg-2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-head);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--copper);
+    position: relative;
+    z-index: 1;
+  }
+
+  .step-content h4 {
+    font-family: var(--font-head);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.35rem;
+    padding-top: 0.25rem;
+  }
+
+  .step-content p {
+    font-size: 0.9375rem;
+    color: var(--text-2);
+    line-height: 1.65;
+  }
+
+  .process-right {
+    padding-top: 0.5rem;
+  }
+
+  .engagement-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .engagement-card {
+    background: var(--bg-2);
+    border: 1px solid var(--border-2);
+    padding: 1.5rem;
+    transition: border-color 0.2s;
+  }
+
+  .engagement-card:hover { border-color: rgba(184,115,51,0.2); }
+
+  .engagement-card h4 {
+    font-family: var(--font-head);
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--copper);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .engagement-card p {
+    font-size: 0.9375rem;
+    color: var(--text-2);
+    line-height: 1.65;
+  }
+
+  .pull-quote {
+    border-left: 2px solid var(--copper-light);
+    padding: 1.5rem 1.75rem;
+    background: var(--copper-subtle);
+    margin-top: 2rem;
+  }
+
+  .pull-quote blockquote {
+    font-family: var(--font-head);
+    font-size: 1.1875rem;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.45;
+    margin-bottom: 0.75rem;
+    font-style: normal;
+  }
+
+  .pull-quote cite {
+    font-size: 0.8125rem;
+    color: var(--text-3);
+    font-style: normal;
+    letter-spacing: 0.05em;
+  }
+
+  /* CONTACT */
+  #contact {
+    background: var(--bg-2);
+    border-top: 1px solid var(--border-2);
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .contact-tagline {
+    font-size: 1rem;
+    color: var(--text-2);
+    line-height: 1.75;
+    margin-bottom: 2.5rem;
+    font-style: italic;
+  }
+
+  .contact-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .contact-method {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    background: var(--bg-3);
+    border: 1px solid var(--border-2);
+    text-decoration: none;
+    color: var(--text);
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .contact-method:hover {
+    border-color: rgba(184,115,51,0.3);
+    background: var(--bg-4);
+  }
+
+  .contact-method-icon {
+    width: 36px;
+    height: 36px;
+    background: var(--copper-subtle);
+    border: 1px solid rgba(184,115,51,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--copper);
+  }
+
+  .contact-method-icon svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .contact-method-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    margin-bottom: 0.2rem;
+  }
+
+  .contact-method-value {
+    font-size: 0.9375rem;
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .calendly-placeholder {
+    background: var(--bg-3);
+    border: 1px solid var(--border-2);
+    padding: 3rem 2rem;
+    text-align: center;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .calendly-placeholder p {
+    font-size: 0.875rem;
+    color: var(--text-3);
+    letter-spacing: 0.05em;
+  }
+
+  .calendly-placeholder code {
+    font-size: 0.8125rem;
+    background: var(--bg-4);
+    color: var(--copper);
+    padding: 0.35rem 0.75rem;
+    font-family: monospace;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--bg);
+    border-top: 1px solid var(--border-2);
+    padding: 2.5rem 3rem;
+  }
+
+  .footer-inner {
+    max-width: 1140px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  .footer-logo {
+    font-family: var(--font-head);
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .footer-logo span { color: var(--copper); }
+
+  .footer-tagline {
+    font-size: 0.8125rem;
+    color: var(--text-3);
+    margin-top: 0.25rem;
+  }
+
+  .footer-links {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    list-style: none;
+  }
+
+  .footer-links a {
+    font-size: 0.8125rem;
+    color: var(--text-3);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--text-2); }
+
+  .footer-social {
+    display: flex;
+    gap: 1rem;
+    list-style: none;
+  }
+
+  .footer-social a {
+    width: 34px;
+    height: 34px;
+    border: 1px solid var(--border-2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-3);
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .footer-social a:hover {
+    border-color: rgba(184,115,51,0.3);
+    color: var(--copper);
+  }
+
+  .footer-social svg { width: 14px; height: 14px; }
+
+  .footer-copy {
+    font-size: 0.8125rem;
+    color: var(--text-3);
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* CTA SECTION */
+  .cta-section {
+    text-align: center;
+    padding: 5rem 3rem;
+    background: var(--bg-3);
+    border-top: 1px solid var(--border-2);
+    border-bottom: 1px solid var(--border-2);
+  }
+
+  .cta-section h2 {
+    font-family: var(--font-head);
+    font-size: clamp(1.5rem, 2.5vw, 2.25rem);
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+
+  .cta-section p {
+    font-size: 1rem;
+    color: var(--text-2);
+    margin-bottom: 2rem;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* MOBILE */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 4rem 1.5rem; }
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-photo { display: none; }
+    .problem-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .services-grid { grid-template-columns: 1fr; }
+    .services-header { grid-template-columns: 1fr; }
+    .firm-grid { grid-template-columns: 1fr; }
+    .firm-photo { position: static; }
+    .process-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .footer-inner { flex-direction: column; align-items: flex-start; }
+    .clients-strip { padding: 2rem 1.5rem; }
+    .cta-section { padding: 3.5rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#home" class="nav-logo">In<span>V</span>erum</a>
+  <ul class="nav-links">
+    <li><a href="#the-firm">The Firm</a></li>
+    <li><a href="#services">What We Do</a></li>
+    <li><a href="#how-it-works">How It Works</a></li>
+    <li><a href="#contact" class="btn-nav">Book a Call</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="home" style="padding-left: 3rem; padding-right: 3rem;">
+  <div class="hero-bg"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-eyebrow">Operational Efficiency &amp; Technology Services</div>
+        <h1 class="hero-h1">The right answer.<br><em>Found. Built. Done.</em></h1>
+        <p class="hero-sub">InVerum finds and creates solutions that optimize and automate how businesses operate, built precisely for how each client works.</p>
+        <p class="hero-tailor">Off-the-shelf tools assume your business conforms to their logic. Yours doesn't.</p>
+        <div class="hero-ctas">
+          <a href="#contact" class="btn-primary">Book a Call</a>
+          <a href="#services" class="btn-secondary">See What We Do</a>
+        </div>
+      </div>
+      <div class="hero-photo">
+        <div class="hero-photo-frame">
+          <img src="assets/DRB05721%20Edited%20(1).jpeg" alt="Doug Bonebrake — Principal, InVerum">
+        </div>
+        <div class="hero-photo-accent"></div>
+        <div class="hero-photo-label">Doug Bonebrake &mdash; Principal</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLIENTS -->
+<div class="clients-strip">
+  <div class="clients-inner">
+    <div class="clients-label">Trusted by</div>
+    <div class="clients-list">
+      <span class="client-name">Mayo Clinic</span>
+      <span class="client-name">Cerner / Oracle Health</span>
+      <span class="client-name">CRL</span>
+      <span class="client-name">Viracor-Eurofins</span>
+      <span class="client-name">Hayes Company</span>
+      <span class="client-name">Diagnostics.ai</span>
+      <span class="client-name">OverSite Health</span>
+      <span class="client-name">Lindsay Bonebrake Therapy</span>
+    </div>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section id="problem">
+  <div class="container">
+    <div class="problem-grid">
+      <div class="problem-left reveal">
+        <div class="section-label">The Problem</div>
+        <h2 class="section-h2">SMBs are<br><em>chronically underserved</em><br>by enterprise software.</h2>
+        <p class="section-intro" style="margin-top: 1rem;">Enterprise platforms are built for organizations with dedicated admin staff, implementation budgets, and IT departments. Small and mid-market businesses get sold watered-down versions and spend more time managing software than running their business.</p>
+        <p class="section-intro" style="margin-top: 1rem;">InVerum builds the other way around.</p>
+      </div>
+      <div class="problem-right reveal">
+        <div class="problem-point">
+          <div class="problem-point-num">01</div>
+          <div class="problem-point-text">
+            <h4>You use 20% of what you pay for</h4>
+            <p>Enterprise tools assume your business maps to their logic. Most don't. The result is workarounds, manual patches, and processes that exist to serve the software.</p>
+          </div>
+        </div>
+        <div class="problem-point">
+          <div class="problem-point-num">02</div>
+          <div class="problem-point-text">
+            <h4>Consultants diagnose. Developers execute.</h4>
+            <p>Most firms do one or the other. You get a report with no builder, or a builder with no strategy. InVerum does both in sequence.</p>
+          </div>
+        </div>
+        <div class="problem-point">
+          <div class="problem-point-num">03</div>
+          <div class="problem-point-text">
+            <h4>The right answer already exists</h4>
+            <p>Most operational problems have an objectively better solution. The job is to find it, design for it, and build it precisely. That is the only thing InVerum does.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="services-header reveal">
+      <div>
+        <div class="section-label">What We Do</div>
+        <h2 class="section-h2">Enterprise capability.<br><em>Without enterprise overhead.</em></h2>
+      </div>
+      <p style="color: var(--text-2); font-size: 1rem; line-height: 1.75;">Most businesses don't need a platform built for 10,000 users. They need something built for them. Every InVerum engagement starts with understanding how the business actually operates before a single line of code is written.</p>
+    </div>
+    <div class="services-grid reveal">
+      <div class="service-card">
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25">
+          <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+          <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+        </svg>
+        <h3>Process Automation &amp; Internal Tooling</h3>
+        <p>Custom-built applications replacing manual, error-prone workflows. Built for how the client works, not for how a platform vendor assumes they work.</p>
+      </div>
+      <div class="service-card">
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25">
+          <circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
+        </svg>
+        <h3>AI Integration &amp; Custom Development</h3>
+        <p>Surgical deployment of AI where it actually solves a problem. Web apps, dashboards, pipelines, and integrations built against real operational requirements.</p>
+      </div>
+      <div class="service-card">
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+          <circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+        <h3>Fractional Technical Leadership</h3>
+        <p>Product ownership, technical strategy, and engineering oversight for companies that need senior-level capability without a full-time hire. The principal is in every engagement.</p>
+      </div>
+      <div class="service-card">
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25">
+          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+        </svg>
+        <h3>Operational Efficiency Consulting</h3>
+        <p>Lean methodology-grounded audits rooted in 5S principles from Mayo Clinic quality training. Waste identification, flow optimization, process redesign. This is where every engagement starts.</p>
+      </div>
+      <div class="service-card">
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+        <h3>Compliance &amp; Regulatory Technology</h3>
+        <p>Technical infrastructure for HIPAA, ISO 27001, and FDA 21 CFR Part 11. Built to pass audits, not just satisfy checklists.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- THE FIRM -->
+<section id="the-firm">
+  <div class="container">
+    <div class="firm-grid">
+      <div class="firm-left reveal">
+        <div class="section-label">The Firm</div>
+        <h2 class="section-h2">Built on<br><em>objective truth.</em></h2>
+        <div class="firm-body" style="margin-top: 2rem;">
+          <p>The name InVerum derives from the Latin <em>verum</em>, meaning objective truth. Most operational problems have a right answer. The job is to find it without agenda, design for it without compromise, and build it without waste. That is the only operating principle here.</p>
+          <p>The firm was built by a practitioner, not a consultant. <strong>Doug Bonebrake</strong> spent nearly a decade as a product owner and product manager at Cerner and Oracle Health, two of the largest enterprise health IT platforms in the world. He has seen what scale looks like from the inside, and what happens when organizations build for complexity instead of clarity.</p>
+          <p>Before that, he was a Clinical Laboratory Scientist. He holds an MBA, is agile certified, and earned his 5S certification at both bronze and silver levels through the Mayo Clinic Quality Program. Lean operational methodology is not a framework invoked at kickoff; it is embedded in every assessment InVerum conducts.</p>
+          <p>He currently operates multiple concurrent technology ventures including a clinical trial sample management platform, logistics technology engagements, and AI-powered diagnostic tooling for a London-based firm. The advice is current, tested, and grounded in conditions that are live right now.</p>
+          <p><strong>The principal is in every engagement. Not staffed out.</strong></p>
+        </div>
+        <div class="firm-credentials">
+          <div class="credential"><strong>Cerner / Oracle Health</strong> <span>Product Owner &amp; Product Manager, 9 years</span></div>
+          <div class="credential"><strong>Mayo Clinic</strong> <span>5S Certified, Bronze &amp; Silver | Quality Fellow, Silver</span></div>
+          <div class="credential"><strong>ASCP Certified</strong> <span>Clinical Laboratory Scientist</span></div>
+          <div class="credential"><strong>MBA</strong> <span>Agile Certified</span></div>
+        </div>
+      </div>
+      <div class="firm-photo reveal">
+        <div class="firm-photo-frame">
+          <img src="assets/DRB05721%20Edited%20(1).jpeg" alt="Doug Bonebrake — Principal, InVerum">
+        </div>
+        <div class="firm-stat">
+          <div class="firm-stat-num">8+</div>
+          <div class="firm-stat-label">Organizations served</div>
+        </div>
+        <div class="firm-stat">
+          <div class="firm-stat-num">9 yrs</div>
+          <div class="firm-stat-label">Enterprise health IT product experience</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how-it-works">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">How It Works</div>
+      <h2 class="section-h2">No pitch. No proposal<br><em>on the first call.</em></h2>
+    </div>
+    <div class="process-grid">
+      <div class="process-steps reveal">
+        <div class="process-step">
+          <div class="step-num">01</div>
+          <div class="step-content">
+            <h4>Discovery</h4>
+            <p>Understand the business, the problem, and whether InVerum is the right fit. This is a conversation, not a sales call.</p>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="step-num">02</div>
+          <div class="step-content">
+            <h4>Assessment</h4>
+            <p>Map what is actually happening, not what leadership thinks is happening. Identify waste, bottlenecks, and root causes using lean methodology.</p>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="step-num">03</div>
+          <div class="step-content">
+            <h4>Design</h4>
+            <p>Propose a system, not just a tool. Define the outcome before a single line of code is written.</p>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="step-num">04</div>
+          <div class="step-content">
+            <h4>Build</h4>
+            <p>Custom development against a defined scope. Iterative, transparent, no surprises.</p>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="step-num">05</div>
+          <div class="step-content">
+            <h4>Handoff</h4>
+            <p>Delivered in a state that runs without InVerum present. Documentation and training where needed. Clean exit or transition to retainer.</p>
+          </div>
+        </div>
+      </div>
+      <div class="process-right reveal">
+        <div class="engagement-cards">
+          <div class="engagement-card">
+            <h4>Retainer Engagements</h4>
+            <p>Ongoing operational needs, multiple problem domains, or embedded technical leadership. Scoped to outcomes, not hours. This is the preferred model for clients with sustained operational complexity.</p>
+          </div>
+          <div class="engagement-card">
+            <h4>Fixed-Scope Projects</h4>
+            <p>Defined, bounded problems with a clear finish line. Scoped, priced, and delivered against an explicit outcome definition. No hourly billing.</p>
+          </div>
+        </div>
+        <p style="font-size: 0.875rem; color: var(--text-3); line-height: 1.65; margin-bottom: 2rem;">InVerum works with clients who understand that operational investment pays for itself. Decision-makers who can move without a six-month procurement process. Industry is irrelevant. If the business has operational complexity, the methodology applies.</p>
+        <div class="pull-quote">
+          <blockquote>"What I didn't know we needed, they already had it built."</blockquote>
+          <cite>Client, logistics industry</cite>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section reveal">
+  <h2>The answer to your operational problem already exists.</h2>
+  <p>InVerum's job is to find it and build it. No forms, no intake questionnaires. Just a conversation.</p>
+  <a href="#contact" class="btn-primary">Book a Call</a>
+</div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-left reveal">
+        <div class="section-label">Contact</div>
+        <h2 class="section-h2">No forms.<br><em>Just a conversation.</em></h2>
+        <p class="contact-tagline" style="margin-top: 1.25rem;">No intake questionnaires. No RFP process. If you have an operational problem worth solving, InVerum will tell you directly whether it is the right fit.</p>
+        <div class="contact-methods">
+          <a href="mailto:hello@inverum.tech" class="contact-method">
+            <div class="contact-method-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+            </div>
+            <div class="contact-method-details">
+              <div class="contact-method-label">Email</div>
+              <div class="contact-method-value">hello@inverum.tech</div>
+            </div>
+          </a>
+          <a href="tel:+1-000-000-0000" class="contact-method">
+            <div class="contact-method-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.16 6.16l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+            </div>
+            <div class="contact-method-details">
+              <div class="contact-method-label">Phone</div>
+              <div class="contact-method-value">[phone placeholder]</div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="contact-right reveal">
+        <div class="calendly-placeholder">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" color="var(--copper)">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+            <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/>
+            <line x1="3" y1="10" x2="21" y2="10"/>
+          </svg>
+          <p>Calendly embed goes here</p>
+          <code>&lt;!-- Calendly inline widget --&gt;</code>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <a href="#home" class="footer-logo">In<span>V</span>erum</a>
+      <div class="footer-tagline">Operational efficiency &amp; technology services.</div>
+    </div>
+    <ul class="footer-links">
+      <li><a href="#the-firm">The Firm</a></li>
+      <li><a href="#services">What We Do</a></li>
+      <li><a href="#how-it-works">How It Works</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <ul class="footer-social">
+      <li>
+        <a href="[linkedin-url]" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+            <rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
+          </svg>
+        </a>
+      </li>
+      <li>
+        <a href="[github-url]" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+          </svg>
+        </a>
+      </li>
+    </ul>
+    <div class="footer-copy">&copy; 2025 InVerum. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
